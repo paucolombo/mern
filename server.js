@@ -1,10 +1,17 @@
 // BASE SETUP
 // ==============================================
-
+//import { checkServerIdentity } from 'tls';
+var SchemaModel = require('./City.js');
 var express = require('express');
 var app = express();
 var port = process.env.PORT || 5000;
 
+
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+  });
 // ROUTES
 // ==============================================
 
@@ -24,9 +31,8 @@ if (err) throw err;
 console.log("Connected");
 });
 
-//var schemaCity = require('./City.js');
-app.get('/getcities', function(req, res) {
-
-    res.send() 
-    //return this.model('Animal').find({ type: this.type }, cb); 
+app.get('/getAllCities', function(req, res) {
+SchemaModel.find(function(err, cities) {
+    console.log('cities: ' , cities);
+    res.send(cities)});
 });
