@@ -6,11 +6,13 @@ import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import Login from './components/login';
 import Signup from './components/signup';
 import Cities from './components/cities';
-
+import {Provider} from 'react-redux';
+import store from './store/store';
 import './App.css';
 
 function App() {
   return (
+    <Provider store={store}>
     <div className="App">
       <Header />
       <Router>
@@ -23,6 +25,7 @@ function App() {
       <Footer />
       </Router>
     </div>
+    </Provider>
   );
 }
 
