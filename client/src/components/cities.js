@@ -44,14 +44,5 @@ export default class Cities extends React.Component {
     )
 }
 
-    fetchCities = () => {
-        this.setState({ ...this.state, isFetching: true })
-        fetch("http://localhost:5000/getAllCities")
-            .then(response => response.json())
-            .then(result => this.setState({
-                cities: result,
-                isFetching: false
-            }))
-            .catch(e => console.log(e));
-    }
+   
 };

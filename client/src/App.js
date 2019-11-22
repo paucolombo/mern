@@ -6,9 +6,18 @@ import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import Login from './components/login';
 import Signup from './components/signup';
 import Cities from './components/cities';
-import {Provider} from 'react-redux';
-import store from './store/store';
+import { composeWithDevTools } from "redux-devtools-extension";
+import { createStore, applyMiddleware } from "redux";
+import { Provider } from "react-redux";
+import thunk from "redux-thunk";
+import rootReducer from "./store/rootReducer";
+//import store from './store/cityReducer';
 import './App.css';
+
+const store = createStore(
+  rootReducer,
+  composeWithDevTools(applyMiddleware(thunk))
+);
 
 function App() {
   return (
