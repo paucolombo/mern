@@ -1,48 +1,59 @@
 import React from 'react';
+import { connect } from "react-redux";
+import { fetchCities } from "../store/actions/cityActions.js";
 
-export default class Cities extends React.Component {
+class Cities extends React.Component {
     constructor() {
         super()
         this.state = {
-            cities: [],
             isFetching: false,
-            cityFilter:""
+            cityFilter: ""
         }
-        this.createCityList= this.createCityList.bind(this);
+        this.createCityList = this.createCityList.bind(this);
     }
     handleChange = (e) => {
         this.setState({
             cityFilter: e.target.value
         })
-        //this.props.onChange(event.target.value)
-      }
+    }
 
     render() {
-        console.log("state ", this.state);
         return (
             <div>
-            <h1>Cities</h1>
-            <input type="text" id="filter" 
-          value={this.state.cityFilter} 
-          onChange={this.handleChange}/>
-            {this.createCityList(this.state.cities)}
+                <h1>Cities</h1>
+                <input type="text" id="filter"
+                    value={this.state.cityFilter}
+                    onChange={this.handleChange} />
+                {this.createCityList(this.props.cities)}
             </div>
-            );
-            
+        );
+
     }
     componentDidMount() {
-        this.fetchCities()
+        this.props.fetchData()
     }
-    createCityList (cities) {
-        const _cities = cities.filter( city => {
+    createCityList(cities) {
+        const _cities = cities.filter(city => {
             return city.city.toLowerCase().indexOf(this.state.cityFilter.toLowerCase()) !== -1
         })
-    return _cities.map((city) =>
-    <li className="listCities" key={city._id}>
-        {city.city}
-    </li>
-    )
-}
-
-   
+        return _cities.map((city) =>
+            <li className="listCities" key={city._id}>
+                {city.city}
+            </li>
+        )
+    }
 };
+const mapStateToProps = (state, ownProps) => {
+    return {
+        cities: state.citiesReducer.cities
+    }
+};
+const mapDispatchToProps = (dispatch) => (
+    {
+     fetchData: () => dispatch(fetchCities())
+    }
+);
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Cities);

@@ -4,7 +4,7 @@ const defaultState = {
     isFetching: false,
 };
 
-const reducer = (state = defaultState, action) => {
+const citiesReducer = (state = defaultState, action) => {
     switch (action.type) {
         case REQUEST_CITIES:
             return {
@@ -21,3 +21,5 @@ const reducer = (state = defaultState, action) => {
             return state;
     }
 }
+
+export default citiesReducer;

@@ -1,23 +1,30 @@
-
-
 export const REQUEST_CITIES = 'REQUEST_CITIES'
-export const requestCities = {
-    type: REQUEST_CITIES
+export const requestCities = () => {
+    return {
+        type: REQUEST_CITIES
+    }
 }
 
 export const REQUEST_CITIES_SUCCESS = 'REQUEST_CITIES_SUCCESS';
 export const requestCitesSuccess = (payload) => {
-    type: REQUEST_CITIES_SUCCESS,
-    payload
+    return {
+        type: REQUEST_CITIES_SUCCESS,
+        payload
+    }
 }
 
 export function fetchCities() {
-    return function(dispatch) {
+    return (dispatch) => {
         dispatch(requestCities())
-
         return fetch('http://localhost:5000/getAllCities')
+            .then((response) => {
+                if (!response.ok) {
+                    throw Error(response.statusText);
+                }
+                return response;
+            })
           .then(response => response.json())
-          .then(json => dispatch(requestCitesSuccess(json)))
+          .then(json => {dispatch(requestCitesSuccess(json))})
     }
 }
 
