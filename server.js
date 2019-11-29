@@ -2,6 +2,7 @@
 // ==============================================
 //import { checkServerIdentity } from 'tls';
 var SchemaModel = require('./City.js');
+var SchemaModelItinerary= require("./Itinerary.js");
 var express = require('express');
 var app = express();
 var port = process.env.PORT || 5000;
@@ -48,6 +49,21 @@ SchemaModel.find(function(err, cities) {
     console.log('cities: ' , cities);
     res.send(cities)});
 });
+
+app.get('/getAllItineraries/:city', (req, res) => {
+    let cityRequested = req.params.city;
+    SchemaModelItinerary.find({ City: cityRequested  })
+    .then( itineraries => {
+        console.log('itineraries: ' , itineraries);
+        res.send(itineraries)
+    });
+});
+    
+app.get('/getAllItineraries', function(req, res) {
+    SchemaModelItinerary.find(function(err, itineraries) {
+        console.log('itineraries: ' , itineraries);
+        res.send(itineraries)});
+    });
 app.post('/postCities', (req, res) => {
     console.log("body ", req.body);
     const newCity = new SchemaModel({
