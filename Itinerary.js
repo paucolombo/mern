@@ -14,11 +14,11 @@ const SchemaItinerary = new Schema({
       type: Number,
   }, 
   price: {
-    type: Number,
+    type: String,
     required:true
 },
 title: {
-    type: Number,
+    type: String,
     required:true
 },
 duration: {
