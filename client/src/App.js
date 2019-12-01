@@ -29,8 +29,9 @@ function App() {
                   <Route path="/cities" component={Cities} />
                   <Route path="/login" component={Login} />
                   <Route path="/signup" component={Signup} />
+                  <Route path="/itinerary"  component={Signup} />
                 </Switch>  
-      <Footer />
+                <Footer />
       </Router>
     </div>
     </Provider>

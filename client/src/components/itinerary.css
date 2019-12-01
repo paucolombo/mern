@@ -1,0 +1,19 @@
+.listItineraries{
+    display: inline;
+    text-align: center;
+    padding-bottom:1%;
+}
+img{
+    padding-top:1%;
+}
+.listItineraries li{
+    display: inline-block;
+    cursor: default;
+    width:100px;
+}
+.bigBoxItinerary {
+    margin-left: 30%;
+    margin-right: 30%;
+    border: 2px solid black;
+    margin-bottom: 1%;
+}
