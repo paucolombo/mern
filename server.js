@@ -3,6 +3,7 @@
 //import { checkServerIdentity } from 'tls';
 var SchemaModel = require('./City.js');
 var SchemaModelItinerary= require("./Itinerary.js");
+var SchemaModelActivity= require("./Activity.js");
 var express = require('express');
 var app = express();
 var port = process.env.PORT || 5000;
@@ -17,15 +18,6 @@ app.use(
 );
 app.use(cors());
 
-/*app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-  });*/
-// ROUTES
-// ==============================================
-
-// sample route with a route the way we're used to seeing it
 app.get('/', function(req, res) {
     res.send('Hello World!');  
 });
@@ -48,6 +40,23 @@ app.get('/getAllCities', function(req, res) {
 SchemaModel.find(function(err, cities) {
     console.log('cities: ' , cities);
     res.send(cities)});
+});
+
+app.get('/getAllActivities', function(req, res) {
+    console.log("llamo ")
+    SchemaModelActivity.find(function(err, activities) {
+        console.log('activities: ' , activities);
+        res.send(activities)});
+    });
+
+app.get('/getAllActivities/:city/:itinerary', (req, res) => {
+    let cityRequested = req.params.city;
+    let itineraryRequested = req.params.itinerary;
+    SchemaModelActivity.find({ city: cityRequested, itinerary: itineraryRequested  })
+    .then( activities => {
+        console.log('activities: ' , activities);
+        res.send(activities)
+    });
 });
 
 app.get('/getAllItineraries/:city', (req, res) => {

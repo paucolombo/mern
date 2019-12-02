@@ -17,3 +17,14 @@ img{
     border: 2px solid black;
     margin-bottom: 1%;
 }
+.divActivities{
+    
+    width: 100%;
+}
+.activity {
+    width: 150px;
+    height: 150px;
+    border: 2px solid black;
+    margin-left: 4px;
+    float:left;
+}

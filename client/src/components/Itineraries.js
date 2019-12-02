@@ -18,7 +18,7 @@ class Intineraries extends React.Component {
     createItineraryList(itinieraries) {
         if(itinieraries !== undefined){
         return itinieraries.map((itinerary,index) =>
-            <Itinerary itinerary={itinerary} key={index}/>
+            <Itinerary city={this.props.city} itinerary={itinerary} key={index}/>
         )} else {
             return <div />
         }
